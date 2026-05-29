@@ -7,18 +7,7 @@ import './LandingPage.css';
 const LandingPage: React.FC = () => {
   const [eventos, setEventos] = useState<Evento[]>([]);
   const [loading, setLoading] = useState(true);
-  const [contador, setContador] = useState(0);
   const [nome, setNome] = useState('');
-
-  const tituloPagina = `🎉 SysEvents - ${contador} eventos cadastrados`;
-
-  const listaEventos = eventos.map((evento) => (
-    <EventoCard key={evento.id} evento={evento} />
-  ));
-
-  const handleContadorClick = () => {
-    setContador(contador + 1);
-  };
 
   const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNome(event.target.value);
@@ -50,7 +39,7 @@ const LandingPage: React.FC = () => {
       <main>
         <section id="home" className="hero">
           <div className="hero-content">
-            <h1>{tituloPagina}</h1>
+            <h1>🎉 SysEvents</h1>
             <p>Descubra os melhores eventos de tecnologia, cultura e entretenimento.</p>
             <button className="btn-primary">Ver eventos</button>
           </div>
@@ -58,13 +47,6 @@ const LandingPage: React.FC = () => {
 
         <section id="eventos" className="eventos">
           <h2>Eventos em Destaque</h2>
-          
-          <div className="contador-section">
-            <p>Clique no botão para aumentar o contador:</p>
-            <button onClick={handleContadorClick} className="btn-contador">
-              Contador: {contador}
-            </button>
-          </div>
 
           <div className="nome-section">
             <p>Digite seu nome:</p>
@@ -82,9 +64,9 @@ const LandingPage: React.FC = () => {
             <div className="loading">Carregando eventos...</div>
           ) : (
             <div className="eventos-grid">
-              {listaEventos.length > 0 ? listaEventos : (
-                <p>Nenhum evento encontrado.</p>
-              )}
+              {eventos.map((evento) => (
+                <EventoCard key={evento.id} evento={evento} />
+              ))}
             </div>
           )}
         </section>
