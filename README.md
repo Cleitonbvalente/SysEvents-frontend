@@ -1,4 +1,3 @@
-cd /mnt/c/Users/cleit/OneDrive/Documentos/sysevents-frontend
 cat > README.md << 'EOF'
 # 🎫 SysEvents - Frontend
 
