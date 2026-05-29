@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # 🎫 SysEvents - Frontend
 
 Landing Page do Sistema de Gestão de Eventos (SysEvents) desenvolvida em React.js + TypeScript.
