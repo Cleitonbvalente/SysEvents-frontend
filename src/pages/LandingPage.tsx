@@ -14,7 +14,7 @@ const LandingPage: React.FC = () => {
   useEffect(() => {
     fetch('https://sysevents-1.onrender.com/api/eventos')
       .then(r => r.json())
-      .then(data => { if (data.success) setEventos(data.data); })
+      .then((data: { success: boolean; data: Evento[] }) => { if (data.success) setEventos(data.data); })
       .catch(() => {})
       .finally(() => setLoadingEventos(false));
 

@@ -26,11 +26,8 @@ const ProfilePage: React.FC = () => {
       navigate('/login');
       return;
     }
-
     buscarPerfilUsuario()
-      .then(res => {
-        if (res.success && res.data) setUsuario(res.data);
-      })
+      .then(res => { if (res.success && res.data) setUsuario(res.data); })
       .finally(() => setCarregando(false));
   }, [navigate]);
 
@@ -39,8 +36,6 @@ const ProfilePage: React.FC = () => {
     removerDadosUsuario();
     navigate('/');
   };
-
-  const inicialNome = (nome: string) => nome.charAt(0).toUpperCase();
 
   if (carregando && !usuario) {
     return (
@@ -64,18 +59,18 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="profile-page">
-      {/* Banner + avatar */}
       <div className="profile-banner">
         <div className="profile-avatar-wrap">
           {usuario.avatar ? (
             <img src={usuario.avatar} alt={usuario.nome} className="profile-avatar-img" />
           ) : (
-            <div className="profile-avatar-inicial">{inicialNome(usuario.nome)}</div>
+            <div className="profile-avatar-inicial">
+              {usuario.nome.charAt(0).toUpperCase()}
+            </div>
           )}
         </div>
       </div>
 
-      {/* Identidade */}
       <div className="profile-identity">
         <h1>{usuario.nome}</h1>
         <p className="profile-email">{usuario.email}</p>
@@ -84,7 +79,6 @@ const ProfilePage: React.FC = () => {
         </span>
       </div>
 
-      {/* Informações adicionais */}
       <div className="profile-info-grid">
         {usuario.bio && (
           <div className="info-card info-card-full">
@@ -92,21 +86,18 @@ const ProfilePage: React.FC = () => {
             <p>{usuario.bio}</p>
           </div>
         )}
-
         {usuario.telefone && (
           <div className="info-card">
             <span className="info-label">📞 Telefone</span>
             <p>{usuario.telefone}</p>
           </div>
         )}
-
         {usuario.endereco && (
           <div className="info-card">
             <span className="info-label">📍 Endereço</span>
             <p>{usuario.endereco}</p>
           </div>
         )}
-
         {!usuario.bio && !usuario.telefone && !usuario.endereco && (
           <div className="info-card info-card-full info-card-empty">
             <p>Nenhuma informação adicional cadastrada.</p>
@@ -114,7 +105,6 @@ const ProfilePage: React.FC = () => {
         )}
       </div>
 
-      {/* Ações */}
       <div className="profile-actions">
         <Link to="/" className="profile-btn-secondary">← Voltar ao início</Link>
         <button className="profile-btn-danger" onClick={handleLogout}>Sair da conta</button>

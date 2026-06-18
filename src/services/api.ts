@@ -69,8 +69,6 @@ export async function buscarPalestrantes(): Promise<{ success: boolean; data?: U
   }
 }
 
-// ── Token ──────────────────────────────────────────
-
 export function salvarToken(token: string): void {
   localStorage.setItem('sysevents_token', token);
 }
@@ -82,8 +80,6 @@ export function obterToken(): string | null {
 export function removerToken(): void {
   localStorage.removeItem('sysevents_token');
 }
-
-// ── Dados do usuário logado ────────────────────────
 
 export function salvarDadosUsuario(usuario: Usuario): void {
   localStorage.setItem('sysevents_usuario', JSON.stringify(usuario));
@@ -101,8 +97,6 @@ export function obterDadosUsuario(): Usuario | null {
 export function removerDadosUsuario(): void {
   localStorage.removeItem('sysevents_usuario');
 }
-
-// ── Headers autenticados ───────────────────────────
 
 export function headersAutenticados(): HeadersInit {
   const token = obterToken();

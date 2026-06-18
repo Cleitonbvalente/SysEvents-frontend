@@ -6,7 +6,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ── Loading ────────────────────────────────────── */
 .profile-loading {
   min-height: 100vh;
   display: flex;
@@ -38,7 +37,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Banner ─────────────────────────────────────── */
 .profile-banner {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   height: 180px;
@@ -78,7 +76,6 @@
   justify-content: center;
 }
 
-/* ── Identidade ─────────────────────────────────── */
 .profile-identity {
   text-align: center;
   padding: 4rem 1rem 1.5rem;
@@ -112,7 +109,6 @@
   margin-top: 0.25rem;
 }
 
-/* ── Info grid ──────────────────────────────────── */
 .profile-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -156,7 +152,6 @@
   line-height: 1.5;
 }
 
-/* ── Ações ──────────────────────────────────────── */
 .profile-actions {
   display: flex;
   justify-content: center;
@@ -199,12 +194,10 @@
   background: #fff0f0;
 }
 
-/* ── Responsivo ─────────────────────────────────── */
 @media (max-width: 480px) {
   .profile-info-grid {
     grid-template-columns: 1fr;
   }
-
   .info-card-full {
     grid-column: 1;
   }

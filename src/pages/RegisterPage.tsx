@@ -48,7 +48,6 @@ const RegisterPage: React.FC = () => {
       setErro('As senhas não coincidem.');
       return;
     }
-
     if (form.senha.length < 6) {
       setErro('A senha deve ter no mínimo 6 caracteres.');
       return;
@@ -89,32 +88,19 @@ const RegisterPage: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
-          {/* Campos obrigatórios */}
           <div className="form-group">
             <label htmlFor="nome">Nome completo</label>
             <input
-              id="nome"
-              name="nome"
-              type="text"
-              placeholder="Seu nome"
-              value={form.nome}
-              onChange={handleChange}
-              required
-              autoComplete="name"
+              id="nome" name="nome" type="text" placeholder="Seu nome"
+              value={form.nome} onChange={handleChange} required autoComplete="name"
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="email">E-mail</label>
             <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="seu@email.com"
-              value={form.email}
-              onChange={handleChange}
-              required
-              autoComplete="email"
+              id="email" name="email" type="email" placeholder="seu@email.com"
+              value={form.email} onChange={handleChange} required autoComplete="email"
             />
           </div>
 
@@ -130,32 +116,19 @@ const RegisterPage: React.FC = () => {
           <div className="form-group">
             <label htmlFor="senha">Senha</label>
             <input
-              id="senha"
-              name="senha"
-              type="password"
-              placeholder="Mínimo 6 caracteres"
-              value={form.senha}
-              onChange={handleChange}
-              required
-              autoComplete="new-password"
+              id="senha" name="senha" type="password" placeholder="Mínimo 6 caracteres"
+              value={form.senha} onChange={handleChange} required autoComplete="new-password"
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="confirmarSenha">Confirmar senha</label>
             <input
-              id="confirmarSenha"
-              name="confirmarSenha"
-              type="password"
-              placeholder="Repita a senha"
-              value={form.confirmarSenha}
-              onChange={handleChange}
-              required
-              autoComplete="new-password"
+              id="confirmarSenha" name="confirmarSenha" type="password" placeholder="Repita a senha"
+              value={form.confirmarSenha} onChange={handleChange} required autoComplete="new-password"
             />
           </div>
 
-          {/* Campos opcionais */}
           <div className="optional-divider">
             <span>Informações adicionais (opcional)</span>
           </div>
@@ -172,49 +145,33 @@ const RegisterPage: React.FC = () => {
               {form.avatar ? '📷 Trocar foto' : '📷 Adicionar foto de perfil'}
             </button>
             <input
-              ref={avatarInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleAvatarChange}
-              style={{ display: 'none' }}
+              ref={avatarInputRef} type="file" accept="image/*"
+              onChange={handleAvatarChange} style={{ display: 'none' }}
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="bio">Bio</label>
             <textarea
-              id="bio"
-              name="bio"
-              rows={3}
+              id="bio" name="bio" rows={3}
               placeholder="Fale um pouco sobre você..."
-              value={form.bio}
-              onChange={handleChange}
+              value={form.bio} onChange={handleChange}
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="telefone">Telefone</label>
             <input
-              id="telefone"
-              name="telefone"
-              type="tel"
-              placeholder="(00) 00000-0000"
-              value={form.telefone}
-              onChange={handleChange}
-              autoComplete="tel"
+              id="telefone" name="telefone" type="tel" placeholder="(00) 00000-0000"
+              value={form.telefone} onChange={handleChange} autoComplete="tel"
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="endereco">Endereço</label>
             <input
-              id="endereco"
-              name="endereco"
-              type="text"
-              placeholder="Rua, número, cidade"
-              value={form.endereco}
-              onChange={handleChange}
-              autoComplete="street-address"
+              id="endereco" name="endereco" type="text" placeholder="Rua, número, cidade"
+              value={form.endereco} onChange={handleChange} autoComplete="street-address"
             />
           </div>
 
