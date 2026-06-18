@@ -10,3 +10,14 @@ export interface Evento {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Usuario {
+  id: number;
+  nome: string;
+  email: string;
+  papel: string;
+  avatar?: string;
+  bio?: string;
+  telefone?: string;
+  endereco?: string;
+}
