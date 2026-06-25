@@ -94,6 +94,13 @@
   color: #667eea;
 }
 
+.nav-btn-admin {
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  font-size: 0.82rem;
+}
+
 /* ── Chip de usuário logado ───────────────────── */
 .usuario-chip {
   display: flex;

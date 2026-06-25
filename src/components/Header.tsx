@@ -45,6 +45,13 @@ const Header: React.FC = () => {
             <ul className="nav-auth">
               {token ? (
                 <>
+                  {usuario?.papel === 'admin' && (
+                    <li>
+                      <Link to="/admin/usuarios" className="nav-btn nav-btn-admin">
+                        🛡️ Admin
+                      </Link>
+                    </li>
+                  )}
                   <li>
                     <Link to="/perfil" className="usuario-chip">
                       <div className="usuario-avatar-mini">

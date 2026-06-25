@@ -57,6 +57,71 @@ export async function buscarPerfilUsuario(): Promise<{ success: boolean; data?: 
   }
 }
 
+export interface AtualizarPerfilPayload {
+  nome?: string;
+  bio?: string;
+  telefone?: string;
+  endereco?: string;
+  avatar?: string;
+}
+
+export async function atualizarPerfil(
+  payload: AtualizarPerfilPayload
+): Promise<{ success: boolean; message?: string; data?: Usuario }> {
+  try {
+    const response = await fetch(`${BASE_URL}/usuarios/me`, {
+      method: 'PUT',
+      headers: headersAutenticados() as Record<string, string>,
+      body: JSON.stringify(payload),
+    });
+    return response.json();
+  } catch {
+    return { success: false, message: 'Erro de conexão.' };
+  }
+}
+
+export async function buscarTodosUsuarios(): Promise<{ success: boolean; data?: Usuario[] }> {
+  try {
+    const response = await fetch(`${BASE_URL}/usuarios`, {
+      headers: headersAutenticados() as Record<string, string>,
+    });
+    if (!response.ok) return { success: false };
+    return response.json();
+  } catch {
+    return { success: false };
+  }
+}
+
+export async function atualizarUsuario(
+  id: number,
+  payload: Partial<Omit<Usuario, 'id'>>
+): Promise<{ success: boolean; message?: string; data?: Usuario }> {
+  try {
+    const response = await fetch(`${BASE_URL}/usuarios/${id}`, {
+      method: 'PUT',
+      headers: headersAutenticados() as Record<string, string>,
+      body: JSON.stringify(payload),
+    });
+    return response.json();
+  } catch {
+    return { success: false, message: 'Erro de conexão.' };
+  }
+}
+
+export async function deletarUsuario(
+  id: number
+): Promise<{ success: boolean; message?: string }> {
+  try {
+    const response = await fetch(`${BASE_URL}/usuarios/${id}`, {
+      method: 'DELETE',
+      headers: headersAutenticados() as Record<string, string>,
+    });
+    return response.json();
+  } catch {
+    return { success: false, message: 'Erro de conexão.' };
+  }
+}
+
 export async function buscarPalestrantes(): Promise<{ success: boolean; data?: Usuario[] }> {
   try {
     const token = obterToken();
