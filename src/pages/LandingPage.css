@@ -137,7 +137,6 @@
   transform: translateY(-2px);
 }
 
-/* stats bar */
 .hero-stats {
   position: relative;
   z-index: 1;
@@ -177,7 +176,6 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* ─── Como funciona ─────────────────────────────── */
 .como-funciona {
   padding: 5rem 2rem;
   background: #f8f9ff;
@@ -249,7 +247,6 @@
   margin: 0;
 }
 
-/* ─── Eventos ───────────────────────────────────── */
 .eventos {
   padding: 5rem 2rem;
   max-width: 1200px;
@@ -271,7 +268,6 @@
   text-align: left;
 }
 
-/* ─── Palestrantes ──────────────────────────────── */
 .palestrantes {
   background: #f8f9ff;
   padding: 5rem 2rem;
@@ -361,7 +357,6 @@
   margin-top: 0.25rem;
 }
 
-/* ─── Empty state ───────────────────────────────── */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -395,7 +390,6 @@
   background: #ede9fe;
 }
 
-/* ─── Loading ───────────────────────────────────── */
 .loading {
   display: flex;
   flex-direction: column;
@@ -418,7 +412,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* ─── Contato ───────────────────────────────────── */
 .contato {
   padding: 5rem 2rem;
   max-width: 600px;
@@ -473,7 +466,6 @@
   transform: translateY(-1px);
 }
 
-/* ─── Footer ────────────────────────────────────── */
 .footer {
   background: #1a1a2e;
   color: #ccc;
@@ -527,7 +519,6 @@
   padding-top: 1rem;
 }
 
-/* ─── Responsivo ────────────────────────────────── */
 @media (max-width: 768px) {
   .hero-content h1 {
     font-size: 2rem;

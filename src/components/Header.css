@@ -101,7 +101,6 @@
   font-size: 0.82rem;
 }
 
-/* ── Chip de usuário logado ───────────────────── */
 .usuario-chip {
   display: flex;
   align-items: center;
