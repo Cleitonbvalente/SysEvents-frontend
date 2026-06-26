@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { obterToken, removerToken, obterDadosUsuario, removerDadosUsuario } from '../services/api';
 import './Header.css';
 
 const Header: React.FC = () => {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [token, setToken] = useState(obterToken());
+  const [usuario, setUsuario] = useState(obterDadosUsuario());
   const location = useLocation();
-  const token = obterToken();
-  const usuario = obterDadosUsuario();
+
+  useEffect(() => {
+    setMenuAberto(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const sync = () => {
+      setToken(obterToken());
+      setUsuario(obterDadosUsuario());
+    };
+    window.addEventListener('sysevents:auth-change', sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener('sysevents:auth-change', sync);
+      window.removeEventListener('storage', sync);
+    };
+  }, []);
+
   const isAuthPage = location.pathname === '/login' || location.pathname === '/registrar';
   const primeiroNome = usuario?.nome?.split(' ')[0] ?? '';
 
   const handleLogout = () => {
     removerToken();
     removerDadosUsuario();
+    window.dispatchEvent(new CustomEvent('sysevents:auth-change'));
     window.location.href = '/';
   };
 
@@ -31,16 +50,17 @@ const Header: React.FC = () => {
             className="menu-hamburger"
             onClick={() => setMenuAberto(!menuAberto)}
             aria-label="Menu"
+            aria-expanded={menuAberto}
           >
-            ☰
+            {menuAberto ? '✕' : '☰'}
           </button>
 
           <nav className={`nav ${menuAberto ? 'active' : ''}`}>
             <ul>
-              <li><a href="#home">Início</a></li>
-              <li><a href="#eventos">Eventos</a></li>
-              <li><a href="#palestrantes">Palestrantes</a></li>
-              <li><a href="#contato">Contato</a></li>
+              <li><a href="#home" onClick={() => setMenuAberto(false)}>Início</a></li>
+              <li><a href="#eventos" onClick={() => setMenuAberto(false)}>Eventos</a></li>
+              <li><a href="#palestrantes" onClick={() => setMenuAberto(false)}>Palestrantes</a></li>
+              <li><a href="#contato" onClick={() => setMenuAberto(false)}>Contato</a></li>
             </ul>
             <ul className="nav-auth">
               {token ? (

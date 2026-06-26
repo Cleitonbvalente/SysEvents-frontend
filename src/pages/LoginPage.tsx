@@ -27,6 +27,7 @@ const LoginPage: React.FC = () => {
         if (resposta.data.usuario) {
           salvarDadosUsuario(resposta.data.usuario);
         }
+        window.dispatchEvent(new CustomEvent('sysevents:auth-change'));
         navigate('/');
       } else {
         setErro(resposta.message || 'E-mail ou senha incorretos.');

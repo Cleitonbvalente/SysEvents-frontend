@@ -70,15 +70,24 @@ const ProfilePage: React.FC = () => {
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setForm(prev => ({ ...prev, avatar: reader.result as string }));
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const MAX = 300;
+      const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d')!.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      setForm(prev => ({ ...prev, avatar: canvas.toDataURL('image/jpeg', 0.7) }));
     };
-    reader.readAsDataURL(file);
+    img.src = url;
   };
 
   const handleSalvar = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!usuario) return;
     if (!form.nome.trim()) {
       setErro('O nome não pode ficar em branco.');
       return;
@@ -95,8 +104,13 @@ const ProfilePage: React.FC = () => {
         avatar: form.avatar || undefined,
       });
       if (resposta.success && resposta.data) {
-        setUsuario(resposta.data);
-        salvarDadosUsuario(resposta.data);
+        const dadosAtualizados: Usuario = {
+          ...resposta.data,
+          avatar: resposta.data.avatar ?? form.avatar ?? usuario?.avatar,
+        };
+        setUsuario(dadosAtualizados);
+        salvarDadosUsuario(dadosAtualizados);
+        window.dispatchEvent(new CustomEvent('sysevents:auth-change'));
         setSucesso('Perfil atualizado com sucesso!');
         setTimeout(() => { setSucesso(''); setModoEdicao(false); }, 1500);
       } else {
@@ -141,7 +155,7 @@ const ProfilePage: React.FC = () => {
       <div className="profile-banner">
         <div
           className={`profile-avatar-wrap${modoEdicao ? ' profile-avatar-editavel' : ''}`}
-          onClick={modoEdicao ? () => avatarInputRef.current?.click() : undefined}
+          onClick={modoEdicao && !salvando ? () => avatarInputRef.current?.click() : undefined}
           title={modoEdicao ? 'Clique para trocar a foto' : undefined}
         >
           {avatarPreview ? (
@@ -182,6 +196,17 @@ const ProfilePage: React.FC = () => {
                 value={form.nome}
                 onChange={handleFormChange}
                 required
+              />
+            </div>
+
+            <div className="form-group form-group-full">
+              <label htmlFor="edit-email">E-mail</label>
+              <input
+                id="edit-email"
+                type="email"
+                value={usuario.email}
+                disabled
+                className="input-disabled"
               />
             </div>
 

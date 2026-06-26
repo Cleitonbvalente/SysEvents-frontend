@@ -180,7 +180,28 @@ const AdminUsuariosPage: React.FC = () => {
           <option value="palestrante">Palestrante</option>
           <option value="admin">Admin</option>
         </select>
+        <button
+          className="admin-reload-btn"
+          onClick={() => {
+            setCarregando(true);
+            buscarTodosUsuarios()
+              .then(res => { if (res.success && res.data) setUsuarios(res.data); })
+              .finally(() => setCarregando(false));
+          }}
+          title="Recarregar lista"
+          disabled={carregando}
+        >
+          🔄
+        </button>
       </div>
+
+      {!carregando && (
+        <p className="admin-count">
+          {usuariosFiltrados.length === usuarios.length
+            ? `${usuarios.length} usuário${usuarios.length !== 1 ? 's' : ''}`
+            : `${usuariosFiltrados.length} de ${usuarios.length} usuário${usuarios.length !== 1 ? 's' : ''}`}
+        </p>
+      )}
 
       {carregando ? (
         <div className="admin-loading">
@@ -273,7 +294,23 @@ const AdminUsuariosPage: React.FC = () => {
         <div className="modal-overlay" onClick={fecharEdicao}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>✏️ Editar Usuário</h2>
+              <div className="modal-header-user">
+                <div className="modal-avatar">
+                  {usuarioEditando.avatar ? (
+                    <img src={usuarioEditando.avatar} alt={usuarioEditando.nome} />
+                  ) : (
+                    <div
+                      className="modal-avatar-inicial"
+                      style={{
+                        background: (PAPEL_LABEL[usuarioEditando.papel] ?? PAPEL_LABEL['participante']).cor,
+                      }}
+                    >
+                      {usuarioEditando.nome.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                </div>
+                <h2>✏️ Editar Usuário</h2>
+              </div>
               <button className="modal-close" onClick={fecharEdicao}>✕</button>
             </div>
             <form onSubmit={handleSalvarEdicao} className="modal-form">
